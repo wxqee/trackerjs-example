@@ -629,3 +629,5 @@ Tracker.afterFlush = function (f) {
   afterFlushCallbacks.push(f);
   requireFlush();
 };
+
+module.exports = Tracker;
