@@ -1,5 +1,4 @@
 const Tracker = require('./tracker');
-
 let weather = 'sunny';
 const weatherDep = new Tracker.Dependency;
 
@@ -16,7 +15,18 @@ function setWeather(newWeather) {
 }
 
 Tracker.autorun(() => {
-    console.log("weather", getWeather());
+    const weather = getWeather();
+
+    if (typeof window !== 'undefined') {
+        // in window
+        const body = document.getElementsByTagName('body')[0];
+        const li = document.createElement('div');
+        li.innerText = weather;
+        body.appendChild(li);
+    } else {
+        // in node.js
+        console.log(weather);
+    }
 });
 
 setTimeout(() => {
@@ -29,9 +39,9 @@ setTimeout(() => {
 
 setTimeout(() => {
     setWeather('rain a lot');
-}, 3000);
+}, 2000);
 
 setTimeout(() => {
     setWeather('sunny');
-}, 4000);
+}, 3000);
 
