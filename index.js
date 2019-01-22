@@ -9,11 +9,10 @@ function getWeather() {
 }
 
 function setWeather(newWeather) {
-    weather = newWeather;
-
-    // Note: We could add logic here to only call `changed` if the new value is
-    // different from the old value.
-    weatherDep.changed();
+    if (newWeather !== weather) {
+        weather = newWeather;
+        weatherDep.changed();
+    }
 }
 
 Tracker.autorun(() => {
